@@ -1,6 +1,5 @@
 import os
 import zipfile
-import wget
 import requests
 from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
