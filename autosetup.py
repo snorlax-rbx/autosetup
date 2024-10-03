@@ -31,6 +31,19 @@ def install_apks(apk_base_name, tab_count):
         print(f"Installing {apk_base_name}{i}.apk...")
         os.system(f'su -c "pm install {apk_path}"')
 
+# Developer options functions
+def enable_developer_options():
+    print("Enabling developer options...")
+    os.system('su -c "settings put global development_settings_enabled 1"')
+    os.system('su -c "settings put global adb_enabled 1"')
+
+def set_developer_options():
+    print("Setting developer options...")
+    os.system('su -c "settings put global force_allow_apps_to_be_external 1"')
+    os.system('su -c "settings put global force_resizeable_activities 1"')
+    os.system('su -c "settings put global freeform_windows 1"')
+    os.system('su -c "settings put global desktop_mode 1"')
+
 # Mode setup functions
 def setup_delta(tab_count):
     delta_zip = "/sdcard/Download/delta.zip"
@@ -66,6 +79,10 @@ def is_rooted():
 
 # Main setup
 def start_setup(mode, tab_count):
+    # Enable developer options
+    enable_developer_options()
+    set_developer_options()
+
     # Download and unzip main app
     app_zip_url = "https://github.com/MinhMeow123/Autosetup/releases/download/database/App.zip"
     app_zip_file = "/sdcard/Download/App.zip"
